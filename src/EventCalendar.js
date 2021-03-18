@@ -26,7 +26,6 @@ export default class EventCalendar extends React.Component {
       date: moment(this.props.initDate),
       index: this.props.size,
     };
-    console.log("calendar props",props)
   }
 
   componentDidMount() {
