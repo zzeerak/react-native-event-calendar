@@ -1,5 +1,5 @@
 // @flow
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity,TouchableWithoutFeedback } from 'react-native';
 import populateEvents from './Packer';
 import React from 'react';
 import moment from 'moment';
@@ -79,6 +79,7 @@ export default class DayView extends React.PureComponent {
   }
 
   _renderLines() {
+    console.log("this",this.props.date)
     const { format24h, start, end } = this.props;
     const offset = this.calendarHeight / (end - start);
 
@@ -97,12 +98,15 @@ export default class DayView extends React.PureComponent {
       }
       const { width, styles } = this.props;
       return [
+          <TouchableOpacity           key={`timeLabel${i}`}
+                                      onPress={()=>this.props.dateTouched(timeText,this.props.date)}>
         <Text
-          key={`timeLabel${i}`}
           style={[styles.timeLabel, { top: offset * index - 6 }]}
         >
           {timeText}
-        </Text>,
+        </Text>
+          </TouchableOpacity>
+            ,
         i === start ? null : (
           <View
             key={`line${i}`}
