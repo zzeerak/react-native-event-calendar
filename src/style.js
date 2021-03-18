@@ -12,7 +12,7 @@ export default function styleConstructor(theme = {}, calendarHeight) {
       ...theme.container,
     },
     contentStyle: {
-      backgroundColor: '#ffff',
+      backgroundColor: 'rgba(214,241,255,0.5)',
       height: calendarHeight + 10,
       ...theme.contentStyle,
     },
@@ -39,6 +39,7 @@ export default function styleConstructor(theme = {}, calendarHeight) {
       width: 15,
       height: 15,
       resizeMode: 'contain',
+      
     },
     arrowButton: {
       width: 50,
