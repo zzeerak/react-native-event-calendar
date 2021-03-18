@@ -188,6 +188,7 @@ export default class EventCalendar extends React.Component {
         <VirtualizedList
           ref="calendar"
           windowSize={2}
+          showsVerticalScrollIndicator={false}
           initialNumToRender={2}
           initialScrollIndex={this.props.size}
           data={events}
