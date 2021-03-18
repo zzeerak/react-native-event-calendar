@@ -79,7 +79,6 @@ export default class DayView extends React.PureComponent {
   }
 
   _renderLines() {
-    console.log("this",this.props.date)
     const { format24h, start, end } = this.props;
     const offset = this.calendarHeight / (end - start);
 
