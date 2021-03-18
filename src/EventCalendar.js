@@ -26,6 +26,7 @@ export default class EventCalendar extends React.Component {
       date: moment(this.props.initDate),
       index: this.props.size,
     };
+    console.log("calendar props",props)
   }
 
   componentDidMount() {
@@ -126,6 +127,7 @@ export default class EventCalendar extends React.Component {
           scrollToFirst={scrollToFirst}
           start={start}
           end={end}
+          dateTouched={(time,date)=>this.props.dateTouched(time,date)}
         />
       </View>
     );
