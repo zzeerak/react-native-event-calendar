@@ -12,7 +12,7 @@ export default function styleConstructor(theme = {}, calendarHeight) {
       ...theme.container,
     },
     contentStyle: {
-      backgroundColor: 'rgba(214,241,255,0.5)',
+      backgroundColor: '#F5F5F5',
       height: calendarHeight + 10,
       ...theme.contentStyle,
     },
