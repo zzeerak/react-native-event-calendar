@@ -80,68 +80,75 @@ export default class DayView extends React.PureComponent {
         )
     }
 
-    _renderLines() {
-        const { format24h, start, end } = this.props
-        const offset = this.calendarHeight / (end - start)
-
-        return range(start, end + 1).map((i, index) => {
-            let timeText
-            let halfTime = ''
-            if (i === start) {
-                timeText = ``
-            } else if (i < 12) {
-                timeText = !format24h ? `${i} AM` : i
-            } else if (i === 12) {
-                timeText = !format24h ? `${i} PM` : i
-            } else if (i === 24) {
-                timeText = !format24h ? `12 AM` : 0
-            } else {
-                timeText = !format24h ? `${i - 12} PM` : i
-            }
-            halfTime = (timeText.split(' ')[0] === '' ? '12' : timeText.split(' ')[0]) + ':' + '30' + ' ' + (timeText.split(' ')[1] ? timeText.split(' ')[1] : 'AM')
-            const { width, styles } = this.props
-            return [
-                <TouchableOpacity
-                    key={`timeLabel${i}`}
-                    onPress={() => this.props.dateTouched(timeText, this.props.date)}>
-                    <Text
-                        style={[styles.timeLabel, { top: offset * index - 6 }]}
-                    >
-                        {timeText}
-                    </Text>
-                </TouchableOpacity>
-                ,
-                i === start ? null : (
-                    <View
-                        key={`line${i}`}
-                        style={[styles.line, { top: offset * index, width: width - 20,marginStart: 15 }]}
-                    />
-                ),
-                <TouchableOpacity
-                    key={`lineHalf${i}`}
-                    onPress={() => this.props.dateTouched(halfTime, this.props.date)}>
-                    <View style={[{ flexDirection: 'row' }]}>
-                        <Text
-                            style={[styles.timeLabel, { top: offset * (index + 0.45) }]}
-                        >
-                            {halfTime}
-                        </Text>
-                        <View
-
-                            style={[
-                                styles.line,
-                                { marginStart: 15, top: offset * (index + 0.5), width: width - 30 },
-                            ]}
-                        >
-
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                ,
-            ]
-        })
-    }
-
+   _renderLines() {
+    const { format24h, start, end } = this.props
+    const offset = this.calendarHeight / (end - start)
+    return range(start, end + 1).map((i, index) => {
+        let timeText
+        let halfTime = ''
+        if (i === start) {
+            timeText = ``
+        } else if (i < 12) {
+            timeText = !format24h ? `${i} AM` : i
+        } else if (i === 12) {
+            timeText = !format24h ? `${i} PM` : i
+        } else if (i === 24) {
+            timeText = !format24h ? `12 AM` : 0
+        } else {
+            timeText = !format24h ? `${i - 12} PM` : i
+        }
+        halfTime = (timeText.split(' ')[0] === '' ? '12' : timeText.split(' ')[0]) + ':' + '30' + ' ' + (timeText.split(' ')[1] ? timeText.split(' ')[1] : 'AM')
+        const { width, styles } = this.props
+        return [
+            <TouchableWithoutFeedback
+                key={`timeLabel${i}`}
+                onPress={() => this.props.dateTouched(timeText, this.props.date)}>
+                <Text
+                    style={[styles.timeLabel, { top: offset * index - 6 }]}
+                >
+                    {timeText}
+                </Text>
+            </TouchableWithoutFeedback>
+            ,
+            i === start ? null : (
+                <View
+                    key={`line${i}`}
+                    style={[styles.line, { top: offset * index, width: width - 20,marginStart: 15 }]}
+                />
+            ),
+            // <TouchableWithoutFeedback
+            //     key={`lineHalf${i}`}
+            //     onPress={() => this.props.dateTouched(halfTime, this.props.date)}
+            // >
+            //     <>
+            //         <Text
+            //             style={[styles.timeLabel, { top: offset * (index + 0.45) }]}
+            //         >
+            //             {halfTime}
+            //         </Text>
+            //         <View
+            //
+            //             style={[
+            //                 styles.line,
+            //                 { marginStart: 15, top: offset * (index + 0.5), width: width - 30 },
+            //             ]}
+            //         >
+            //
+            //         </View>
+            //     </>
+            // </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              key={`timeLabel${i}`}
+              onPress={() => this.props.dateTouched(timeText, this.props.date)}>
+                <Text
+                  style={[styles.timeLabel, { top: offset * (index + 0.45) }]}                    >
+                    {halfTime}
+                </Text>
+            </TouchableWithoutFeedback>
+            ,
+        ]
+    })
+}
     _renderTimeLabels() {
         const { styles, start, end } = this.props
         const offset = this.calendarHeight / (end - start)
